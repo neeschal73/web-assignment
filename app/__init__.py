@@ -23,8 +23,8 @@ def create_app(config_class=DevelopmentConfig):
         Flask application instance
     """
     app = Flask(__name__, 
-                template_folder='app/templates',
-                static_folder='app/static')
+                template_folder='templates',
+                static_folder='static')
     
     # Load configuration
     app.config.from_object(config_class)
@@ -71,11 +71,11 @@ def initialize_sample_data(app):
     Initialize database with sample data
     This function runs once when the app starts
     """
+    from app.models import Category, Book, User
+    
     # Check if data already exists
     if Category.query.first() is not None:
         return
-    
-    from app.models import Category, Book, User
     
     # Create categories
     categories = [
@@ -104,7 +104,8 @@ def initialize_sample_data(app):
             'publisher': 'Scribner',
             'publication_year': 1925,
             'pages': 180,
-            'language': 'English'
+            'language': 'English',
+            'cover_image': 'https://covers.openlibrary.org/b/id/7725349-M.jpg'
         },
         {
             'title': 'To Kill a Mockingbird',
@@ -117,7 +118,8 @@ def initialize_sample_data(app):
             'publisher': 'J.B. Lippincott',
             'publication_year': 1960,
             'pages': 324,
-            'language': 'English'
+            'language': 'English',
+            'cover_image': 'https://covers.openlibrary.org/b/id/7960105-M.jpg'
         },
         {
             'title': '1984',
@@ -130,7 +132,8 @@ def initialize_sample_data(app):
             'publisher': 'Signet Classic',
             'publication_year': 1949,
             'pages': 328,
-            'language': 'English'
+            'language': 'English',
+            'cover_image': 'https://covers.openlibrary.org/b/id/7969049-M.jpg'
         },
         {
             'title': 'The Hobbit',
@@ -143,7 +146,8 @@ def initialize_sample_data(app):
             'publisher': 'Houghton Mifflin Harcourt',
             'publication_year': 1937,
             'pages': 310,
-            'language': 'English'
+            'language': 'English',
+            'cover_image': 'https://covers.openlibrary.org/b/id/8239898-M.jpg'
         },
         {
             'title': 'The Girl with the Dragon Tattoo',
@@ -156,7 +160,8 @@ def initialize_sample_data(app):
             'publisher': 'Knopf',
             'publication_year': 2005,
             'pages': 465,
-            'language': 'English'
+            'language': 'English',
+            'cover_image': 'https://covers.openlibrary.org/b/id/8239918-M.jpg'
         },
         {
             'title': 'Atomic Habits',
@@ -169,7 +174,8 @@ def initialize_sample_data(app):
             'publisher': 'Avery',
             'publication_year': 2018,
             'pages': 320,
-            'language': 'English'
+            'language': 'English',
+            'cover_image': 'https://covers.openlibrary.org/b/id/11292734-M.jpg'
         },
         {
             'title': 'Clean Code',
@@ -182,7 +188,8 @@ def initialize_sample_data(app):
             'publisher': 'Prentice Hall',
             'publication_year': 2008,
             'pages': 464,
-            'language': 'English'
+            'language': 'English',
+            'cover_image': 'https://covers.openlibrary.org/b/id/7710078-M.jpg'
         },
         {
             'title': 'Python Crash Course',
@@ -195,7 +202,8 @@ def initialize_sample_data(app):
             'publisher': 'No Starch Press',
             'publication_year': 2015,
             'pages': 544,
-            'language': 'English'
+            'language': 'English',
+            'cover_image': 'https://covers.openlibrary.org/b/id/10424263-M.jpg'
         },
     ]
     

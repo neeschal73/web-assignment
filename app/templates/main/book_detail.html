@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ book.title }} - Online Bookstore{% endblock %}
+{% block title %}{{ book.title }} - ARX Bookstore{% endblock %}
 
 {% block content %}
 <div class="container py-4">
@@ -16,9 +16,13 @@
         <!-- Book Image -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="min-height: 400px;">
-                    <i class="bi bi-book-fill" style="font-size: 150px; color: rgba(255,255,255,0.3);"></i>
-                </div>
+                {% if book.cover_image %}
+                    <img src="{{ book.cover_image }}" alt="{{ book.title }}" class="card-img-top" style="height: 400px; object-fit: cover;">
+                {% else %}
+                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="min-height: 400px;">
+                        <i class="bi bi-book-fill" style="font-size: 150px; color: rgba(255,255,255,0.3);"></i>
+                    </div>
+                {% endif %}
             </div>
         </div>
 

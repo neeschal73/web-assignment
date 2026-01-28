@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Books - Online Bookstore{% endblock %}
+{% block title %}Books - ARX Bookstore{% endblock %}
 
 {% block content %}
 <div class="container-fluid py-4">
@@ -62,9 +62,13 @@
                     {% for book in books %}
                         <div class="col-md-6 col-lg-4">
                             <div class="card h-100 book-card">
-                                <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="min-height: 250px;">
-                                    <i class="bi bi-book-fill" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
-                                </div>
+                                {% if book.cover_image %}
+                                    <img src="{{ book.cover_image }}" alt="{{ book.title }}" class="card-img-top" style="height: 250px; object-fit: cover;">
+                                {% else %}
+                                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="min-height: 250px;">
+                                        <i class="bi bi-book-fill" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                                    </div>
+                                {% endif %}
                                 <div class="card-body">
                                     <h5 class="card-title">{{ book.title }}</h5>
                                     <p class="card-text text-muted small">by {{ book.author }}</p>

@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Online Bookstore{% endblock %}
+{% block title %}Home - ARX Bookstore{% endblock %}
 
 {% block content %}
 <div class="hero-section bg-primary text-white py-5 mb-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-4 fw-bold mb-4">Welcome to Online Bookstore</h1>
+                <h1 class="display-4 fw-bold mb-4">Welcome to ARX Bookstore</h1>
                 <p class="lead mb-4">Discover thousands of books across all genres. From bestsellers to hidden gems, find your next favorite read.</p>
                 <div class="d-flex gap-2">
                     <a href="{{ url_for('main.books') }}" class="btn btn-light btn-lg">
@@ -52,9 +52,13 @@
         {% for book in featured_books %}
             <div class="col-md-6 col-lg-3">
                 <div class="card h-100 book-card">
-                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="min-height: 250px;">
-                        <i class="bi bi-book-fill" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
-                    </div>
+                    {% if book.cover_image %}
+                        <img src="{{ book.cover_image }}" alt="{{ book.title }}" class="card-img-top" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="min-height: 250px;">
+                            <i class="bi bi-book-fill" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                        </div>
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ book.title }}</h5>
                         <p class="card-text text-muted">by {{ book.author }}</p>
