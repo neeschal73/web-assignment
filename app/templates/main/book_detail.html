@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book.title }} - Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('main.books') }}">Books</a></li>
+            <li class="breadcrumb-item active">{{ book.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Book Image -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="min-height: 400px;">
+                    <i class="bi bi-book-fill" style="font-size: 150px; color: rgba(255,255,255,0.3);"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Book Details -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title mb-2">{{ book.title }}</h1>
+                    <p class="card-text text-muted mb-3">
+                        by <strong>{{ book.author }}</strong>
+                    </p>
+
+                    <!-- Rating -->
+                    <div class="mb-3">
+                        {% if avg_rating > 0 %}
+                            <div class="d-flex align-items-center gap-2">
+                                {% for i in range(1, 6) %}
+                                    {% if i <= avg_rating %}
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    {% else %}
+                                        <i class="bi bi-star text-warning"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="text-muted">({{ reviews|length }} reviews)</span>
+                            </div>
+                        {% else %}
+                            <p class="text-muted"><i class="bi bi-star"></i> No reviews yet</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Price and Stock -->
+                    <div class="mb-4 p-3 bg-light rounded">
+                        <h3 class="text-success mb-2">${{ "%.2f"|format(book.price) }}</h3>
+                        <p class="mb-2">
+                            {% if book.stock > 0 %}
+                                <span class="badge bg-success">{{ book.stock }} in stock</span>
+                            {% else %}
+                                <span class="badge bg-danger">Out of stock</span>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <!-- Add to Cart -->
+                    {% if book.stock > 0 %}
+                        <form method="POST" action="{{ url_for('main.add_to_cart', book_id=book.id) }}">
+                            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                                <i class="bi bi-cart-plus"></i> Add to Cart
+                            </button>
+                        </form>
+                    {% else %}
+                        <button class="btn btn-secondary btn-lg w-100 mb-3" disabled>Out of Stock</button>
+                    {% endif %}
+
+                    <!-- Book Information -->
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <tr>
+                                <th>ISBN:</th>
+                                <td>{{ book.isbn }}</td>
+                            </tr>
+                            <tr>
+                                <th>Category:</th>
+                                <td>
+                                    <a href="{{ url_for('main.books', category=book.category_id) }}">
+                                        {{ book.category.name }}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Publisher:</th>
+                                <td>{{ book.publisher or 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Published:</th>
+                                <td>{{ book.publication_year or 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Pages:</th>
+                                <td>{{ book.pages or 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Language:</th>
+                                <td>{{ book.language }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Description -->
+                    <hr>
+                    <h5>Description</h5>
+                    <p>{{ book.description or 'No description available.' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="row mt-5">
+        <div class="col-md-8">
+            <h3 class="mb-4">Reviews</h3>
+
+            <!-- Add Review Form (for authenticated users) -->
+            {% if current_user.is_authenticated %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Write a Review</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ url_for('main.add_review', book_id=book.id) }}" class="needs-validation">
+                            {{ form.hidden_tag() }}
+
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Rating</label>
+                                {% if form.rating.errors %}
+                                    {{ form.rating(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.rating.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.rating(class="form-control") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Review Title</label>
+                                {% if form.title.errors %}
+                                    {{ form.title(class="form-control is-invalid", placeholder="Enter review title") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.title.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.title(class="form-control", placeholder="Enter review title") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="content" class="form-label">Review Content</label>
+                                {% if form.content.errors %}
+                                    {{ form.content(class="form-control is-invalid", rows="4", placeholder="Share your thoughts about this book...") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.content.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.content(class="form-control", rows="4", placeholder="Share your thoughts about this book...") }}
+                                {% endif %}
+                            </div>
+
+                            {{ form.submit(class="btn btn-primary") }}
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <a href="{{ url_for('auth.login') }}">Login</a> to write a review.
+                </div>
+            {% endif %}
+
+            <!-- Display Reviews -->
+            {% if reviews %}
+                {% for review in reviews %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="card-title">{{ review.title }}</h6>
+                                    <p class="text-muted small mb-2">
+                                        by {{ review.user.full_name }} on {{ review.created_at.strftime('%B %d, %Y') }}
+                                    </p>
+                                    <div class="mb-2">
+                                        {% for i in range(1, 6) %}
+                                            {% if i <= review.rating %}
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            {% else %}
+                                                <i class="bi bi-star text-warning"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-text">{{ review.content }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    No reviews yet. Be the first to review this book!
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
