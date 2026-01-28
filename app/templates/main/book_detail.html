@@ -55,7 +55,7 @@
 
                     <!-- Price and Stock -->
                     <div class="mb-4 p-3 bg-light rounded">
-                        <h3 class="text-success mb-2">${{ "%.2f"|format(book.price) }}</h3>
+                        <h3 class="text-success mb-2">₨{{ book.price|int }}</h3>
                         <p class="mb-2">
                             {% if book.stock > 0 %}
                                 <span class="badge bg-success">{{ book.stock }} in stock</span>

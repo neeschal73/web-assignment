@@ -3,92 +3,182 @@
 {% block title %}Contact Us - ARX Bookstore{% endblock %}
 
 {% block content %}
-<div class="container py-4">
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <h1 class="mb-4">Contact Us</h1>
+<div class="container py-5">
+    <!-- Page Header -->
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto text-center">
+            <h1 class="display-4 fw-bold mb-3">Get in Touch</h1>
+            <p class="lead text-muted">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+    </div>
 
-            <!-- Contact Information -->
+    <div class="row">
+        <!-- Contact Information Cards -->
+        <div class="col-lg-8 mx-auto">
+            <div class="row mb-5 g-4">
+                <!-- Email Card -->
+                <div class="col-md-6">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <h5 class="mt-3 mb-2">Email Us</h5>
+                        <p class="text-muted mb-2">For general inquiries</p>
+                        <a href="mailto:nischalb169@gmail.com" class="contact-link">nischalb169@gmail.com</a>
+                    </div>
+                </div>
+
+                <!-- Phone Card -->
+                <div class="col-md-6">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <h5 class="mt-3 mb-2">Call Us</h5>
+                        <p class="text-muted mb-2">Monday - Friday, 9am - 6pm</p>
+                        <a href="tel:+977-9707734635" class="contact-link">+977-9707734635</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Card -->
             <div class="row mb-5">
-                <div class="col-md-4 text-center mb-3">
-                    <i class="bi bi-envelope-fill" style="font-size: 40px; color: var(--bs-primary);"></i>
-                    <h6 class="mt-3">Email</h6>
-                    <p class="text-muted">info@bookstore.com</p>
-                </div>
-                <div class="col-md-4 text-center mb-3">
-                    <i class="bi bi-telephone-fill" style="font-size: 40px; color: var(--bs-success);"></i>
-                    <h6 class="mt-3">Phone</h6>
-                    <p class="text-muted">+1 (555) 123-4567</p>
-                </div>
-                <div class="col-md-4 text-center mb-3">
-                    <i class="bi bi-geo-alt-fill" style="font-size: 40px; color: var(--bs-danger);"></i>
-                    <h6 class="mt-3">Address</h6>
-                    <p class="text-muted">123 Book Street<br>Reading, NY 10001</p>
+                <div class="col-12">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <h5 class="mt-3 mb-2">Visit Us</h5>
+                        <p class="text-muted mb-0">ARX Bookstore<br>Kathmandu, Nepal</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Contact Form -->
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Send us a Message</h5>
-                </div>
-                <div class="card-body">
-                    <form method="POST" class="needs-validation">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <h2 class="mb-4">Send us a Message</h2>
+                    <form method="POST" class="needs-validation" novalidate>
                         {{ form.hidden_tag() }}
 
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Your Name</label>
-                            {% if form.name.errors %}
-                                {{ form.name(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.name.errors %}{{ error }}{% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.name(class="form-control", placeholder="Enter your name") }}
-                            {% endif %}
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="name" class="form-label fw-semibold">Your Name</label>
+                                {% if form.name.errors %}
+                                    {{ form.name(class="form-control is-invalid", placeholder="John Doe") }}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.name.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.name(class="form-control", placeholder="John Doe") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="email" class="form-label fw-semibold">Email Address</label>
+                                {% if form.email.errors %}
+                                    {{ form.email(class="form-control is-invalid", placeholder="your.email@example.com") }}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.email.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.email(class="form-control", placeholder="your.email@example.com") }}
+                                {% endif %}
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            {% if form.email.errors %}
-                                {{ form.email(class="form-control is-invalid", placeholder="Enter your email") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.email.errors %}{{ error }}{% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.email(class="form-control", placeholder="Enter your email") }}
-                            {% endif %}
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="subject" class="form-label">Subject</label>
+                        <div class="mb-4">
+                            <label for="subject" class="form-label fw-semibold">Subject</label>
                             {% if form.subject.errors %}
-                                {{ form.subject(class="form-control is-invalid", placeholder="Enter subject") }}
-                                <div class="invalid-feedback">
+                                {{ form.subject(class="form-control is-invalid", placeholder="How can we help?") }}
+                                <div class="invalid-feedback d-block">
                                     {% for error in form.subject.errors %}{{ error }}{% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.subject(class="form-control", placeholder="Enter subject") }}
+                                {{ form.subject(class="form-control", placeholder="How can we help?") }}
                             {% endif %}
                         </div>
 
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
+                        <div class="mb-4">
+                            <label for="message" class="form-label fw-semibold">Message</label>
                             {% if form.message.errors %}
-                                {{ form.message(class="form-control is-invalid", rows="6", placeholder="Enter your message") }}
-                                <div class="invalid-feedback">
+                                {{ form.message(class="form-control is-invalid", rows="6", placeholder="Tell us about your inquiry...") }}
+                                <div class="invalid-feedback d-block">
                                     {% for error in form.message.errors %}{{ error }}{% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.message(class="form-control", rows="6", placeholder="Enter your message") }}
+                                {{ form.message(class="form-control", rows="6", placeholder="Tell us about your inquiry...") }}
                             {% endif %}
                         </div>
 
-                        {{ form.submit(class="btn btn-primary w-100") }}
+                        <div class="d-grid gap-2">
+                            {{ form.submit(class="btn btn-primary btn-lg fw-semibold") }}
+                        </div>
                     </form>
                 </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="alert alert-light border border-2 border-primary mt-5 p-4" role="alert">
+                <h6 class="fw-semibold mb-2"><i class="bi bi-info-circle me-2"></i>Response Time</h6>
+                <p class="mb-0">We aim to respond to all inquiries within 24 hours during business days.</p>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+.contact-card {
+    background: var(--white);
+    border: 2px solid #e0e6ed;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.contact-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 16px rgba(30, 60, 114, 0.1);
+    transform: translateY(-4px);
+}
+
+.contact-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2d5a8f 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.8rem;
+}
+
+.contact-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.contact-link:hover {
+    color: #2d5a8f;
+    text-decoration: underline;
+    transform: translateX(4px);
+}
+
+.form-control, .form-select {
+    border: 2px solid #e0e6ed;
+    padding: 0.8rem 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+}
+</style>
 {% endblock %}

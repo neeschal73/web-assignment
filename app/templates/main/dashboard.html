@@ -30,7 +30,7 @@
             <div class="card">
                 <div class="card-body text-center">
                     <h2 class="text-success mb-2">
-                        ${{ "%.2f"|format(orders|map(attribute='total_price')|sum) }}
+                        ₨{{ (orders|map(attribute='total_price')|sum)|int }}
                     </h2>
                     <p class="text-muted mb-0">Total Spent</p>
                 </div>
@@ -79,7 +79,7 @@
                             <td>#{{ order.id }}</td>
                             <td>{{ order.created_at.strftime('%B %d, %Y') }}</td>
                             <td>{{ order.order_items|length }}</td>
-                            <td>${{ "%.2f"|format(order.total_price) }}</td>
+                            <td>₨{{ order.total_price|int }}</td>
                             <td>
                                 {% if order.status == 'Pending' %}
                                     <span class="badge bg-warning">Pending</span>

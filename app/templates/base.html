@@ -19,8 +19,9 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="{{ url_for('main.home') }}">
-                <i class="bi bi-book-fill"></i> ARX Bookstore
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ url_for('main.home') }}">
+                <img src="{{ url_for('static', filename='logo.svg') }}" alt="ARX Logo" style="height: 40px; width: auto;">
+                <span class="d-none d-sm-inline">ARX Bookstore</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -92,37 +93,40 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white mt-5 py-4">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <h5>About ARX Bookstore</h5>
-                    <p>Your trusted destination for quality books. Discover thousands of titles from fiction to technology and everything in between.</p>
+    <footer class="footer-section mt-5">
+        <div class="container">
+            <div class="row py-4 g-4">
+                <div class="col-md-4">
+                    <div class="footer-brand d-flex align-items-center gap-2 mb-3">
+                        <img src="{{ url_for('static', filename='logo.svg') }}" alt="ARX Logo" style="height: 30px; width: auto;">
+                        <span class="fw-bold" style="color: white;">ARX Bookstore</span>
+                    </div>
+                    <p class="text-muted small mb-0">Your trusted destination for quality books. Discover thousands of titles across all genres.</p>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <h5 class="mb-3">Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ url_for('main.home') }}">Home</a></li>
-                        <li class="mb-2"><a href="{{ url_for('main.books') }}">Browse Books</a></li>
-                        <li class="mb-2"><a href="{{ url_for('main.contact') }}">Contact Us</a></li>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3" style="color: white;">Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="{{ url_for('main.home') }}" class="footer-link">Home</a></li>
+                        <li class="mb-2"><a href="{{ url_for('main.books') }}" class="footer-link">Browse Books</a></li>
+                        <li class="mb-2"><a href="{{ url_for('main.contact') }}" class="footer-link">Contact Us</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <h5 class="mb-3">Contact Info</h5>
-                    <p class="mb-2">
-                        <i class="bi bi-envelope me-2"></i>info@bookstore.com
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3" style="color: white;">Contact Info</h6>
+                    <p class="text-muted small mb-2">
+                        <i class="bi bi-envelope me-2"></i><a href="mailto:nischalb169@gmail.com" class="footer-link">nischalb169@gmail.com</a>
                     </p>
-                    <p class="mb-2">
-                        <i class="bi bi-telephone me-2"></i>+1 (555) 123-4567
+                    <p class="text-muted small mb-2">
+                        <i class="bi bi-telephone me-2"></i><a href="tel:+977-9707734635" class="footer-link">+977-9707734635</a>
                     </p>
-                    <p>
-                        <i class="bi bi-geo-alt me-2"></i>123 Book Street, Reading, NY
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-geo-alt me-2"></i>Kathmandu, Nepal
                     </p>
                 </div>
             </div>
-            <hr style="background: rgba(255, 255, 255, 0.1);">
-            <div class="text-center">
-                <p class="mb-0">&copy; 2024 ARX Bookstore. All rights reserved. | Crafted with <i class="bi bi-heart-fill text-danger"></i> for book lovers</p>
+            <hr style="background: rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+            <div class="text-center py-2">
+                <p class="text-muted small mb-0">&copy; 2024 ARX Bookstore. All rights reserved. | Crafted with <i class="bi bi-heart-fill text-danger"></i> for book lovers</p>
             </div>
         </div>
     </footer>

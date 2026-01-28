@@ -3,66 +3,314 @@
 {% block title %}Login - ARX Bookstore{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center py-5">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-body p-5">
-                    <h2 class="card-title text-center mb-4">Login to Your Account</h2>
+<div class="login-wrapper">
+    <div class="login-container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="w-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-5 col-sm-8">
+                        <!-- Welcome Header -->
+                        <div class="text-center mb-5">
+                            <div class="login-logo mx-auto mb-4">
+                                <img src="{{ url_for('static', filename='logo.svg') }}" alt="ARX Logo" style="width: 100%; height: 100%;">
+                            </div>
+                            <h1 class="display-6 fw-bold mb-2">Welcome Back</h1>
+                            <p class="lead text-muted">Sign in to ARX Bookstore</p>
+                        </div>
 
-                    <form method="POST" class="needs-validation">
-                        {{ form.hidden_tag() }}
+                        <!-- Login Card -->
+                        <div class="login-card card border-0 shadow-lg rounded-4">
+                            <div class="card-body p-5">
+                                <form method="POST" class="needs-validation" novalidate>
+                                    {{ form.hidden_tag() }}
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            {% if form.email.errors %}
-                                {{ form.email(class="form-control is-invalid", placeholder="Enter your email") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.email.errors %}{{ error }}{% endfor %}
+                                    <!-- Email Field -->
+                                    <div class="form-group mb-4">
+                                        <label for="email" class="form-label fw-semibold d-block mb-2">Email Address</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-transparent border-end-0 ps-0">
+                                                <i class="bi bi-envelope-fill text-primary"></i>
+                                            </span>
+                                            {% if form.email.errors %}
+                                                {{ form.email(class="form-control border-start-0 is-invalid", placeholder="name@example.com") }}
+                                                <div class="invalid-feedback d-block mt-2">
+                                                    {% for error in form.email.errors %}<small>{{ error }}</small>{% endfor %}
+                                                </div>
+                                            {% else %}
+                                                {{ form.email(class="form-control border-start-0", placeholder="name@example.com", autofocus=true) }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <!-- Password Field -->
+                                    <div class="form-group mb-4">
+                                        <label for="password" class="form-label fw-semibold d-block mb-2">Password</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-transparent border-end-0 ps-0">
+                                                <i class="bi bi-lock-fill text-primary"></i>
+                                            </span>
+                                            {% if form.password.errors %}
+                                                {{ form.password(class="form-control border-start-0 is-invalid", placeholder="Enter your password") }}
+                                                <div class="invalid-feedback d-block mt-2">
+                                                    {% for error in form.password.errors %}<small>{{ error }}</small>{% endfor %}
+                                                </div>
+                                            {% else %}
+                                                {{ form.password(class="form-control border-start-0", placeholder="Enter your password") }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <!-- Remember Me -->
+                                    <div class="form-check mb-4">
+                                        {{ form.remember_me(class="form-check-input") }}
+                                        <label class="form-check-label ms-2" for="remember_me">
+                                            Keep me signed in
+                                        </label>
+                                    </div>
+
+                                    <!-- Login Button -->
+                                    <div class="d-grid gap-2 mb-4">
+                                        {{ form.submit(class="btn btn-primary btn-lg fw-semibold rounded-3") }}
+                                    </div>
+                                </form>
+
+                                <!-- Divider -->
+                                <div class="divider my-4">
+                                    <span>or</span>
                                 </div>
-                            {% else %}
-                                {{ form.email(class="form-control", placeholder="Enter your email", autofocus=true) }}
-                            {% endif %}
+
+                                <!-- Register Link -->
+                                <p class="text-center mb-0">
+                                    Don't have an account? 
+                                    <a href="{{ url_for('auth.register') }}" class="register-link fw-semibold">Create one</a>
+                                </p>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            {% if form.password.errors %}
-                                {{ form.password(class="form-control is-invalid", placeholder="Enter your password") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.password.errors %}{{ error }}{% endfor %}
+                        <!-- Demo Credentials -->
+                        <div class="alert alert-light border-2 border-primary mt-4 p-4 rounded-3">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-info-circle-fill text-primary me-3 mt-1 flex-shrink-0" style="font-size: 1.2rem;"></i>
+                                <div class="flex-grow-1">
+                                    <h6 class="fw-bold mb-2">Demo Credentials</h6>
+                                    <small class="text-muted d-block">
+                                        Email: <code>admin@bookstore.com</code>
+                                    </small>
+                                    <small class="text-muted d-block">
+                                        Password: <code>admin123</code>
+                                    </small>
                                 </div>
-                            {% else %}
-                                {{ form.password(class="form-control", placeholder="Enter your password") }}
-                            {% endif %}
+                            </div>
                         </div>
-
-                        <div class="form-check mb-3">
-                            {{ form.remember_me(class="form-check-input") }}
-                            <label class="form-check-label" for="remember_me">
-                                Remember Me
-                            </label>
-                        </div>
-
-                        {{ form.submit(class="btn btn-primary w-100 mb-3") }}
-                    </form>
-
-                    <hr>
-
-                    <p class="text-center mb-0">
-                        Don't have an account? 
-                        <a href="{{ url_for('auth.register') }}">Register here</a>
-                    </p>
-
-                    <!-- Demo Credentials -->
-                    <div class="alert alert-info mt-4 mb-0">
-                        <strong>Demo Admin Account:</strong><br>
-                        Email: admin@bookstore.com<br>
-                        Password: admin123
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+.login-wrapper {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+}
+
+.min-vh-100 {
+    min-height: 100vh !important;
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2d5a8f 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    box-shadow: 0 8px 16px rgba(30, 60, 114, 0.3);
+}
+
+.login-card {
+    border-radius: 16px !important;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.login-card:hover {
+    box-shadow: 0 16px 32px rgba(30, 60, 114, 0.2) !important;
+    transform: translateY(-2px);
+}
+
+.input-group-lg .input-group-text {
+    padding: 0.75rem 1rem;
+}
+
+.input-group-lg .form-control {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+}
+
+.form-group .input-group {
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.form-group .input-group:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+}
+
+.form-group .form-control {
+    border: none !important;
+    background: transparent;
+}
+
+.form-group .form-control:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none;
+}
+
+.form-group .input-group-text {
+    border: none;
+    background: transparent !important;
+}
+
+.form-check-input {
+    width: 1.25em;
+    height: 1.25em;
+    margin-top: 0.2em;
+    border: 2px solid #dee2e6;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+    border-color: var(--primary-color);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2d5a8f 100%);
+    border: none;
+    transition: all 0.3s ease;
+    padding: 0.75rem 1.5rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(30, 60, 114, 0.3) !important;
+    color: white;
+    border-color: transparent;
+    background: linear-gradient(135deg, #162951 0%, #1f3f5a 100%);
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+    border-color: transparent;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    margin: 1.5rem 0;
+}
+
+.divider span {
+    flex: 0 0 auto;
+    padding: 0 1rem;
+    background: white;
+    color: #999;
+    font-weight: 500;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e6ed;
+}
+
+.register-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.register-link:hover {
+    color: #2d5a8f;
+    text-decoration: underline;
+}
+
+code {
+    background: #f5f7fa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.display-6 {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .login-logo {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+    
+    .display-6 {
+        font-size: 1.5rem;
+    }
+    
+    .login-card {
+        border-radius: 12px !important;
+    }
+    
+    .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem !important;
+    }
+    
+    .input-group-lg .form-control,
+    .input-group-lg .input-group-text {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .col-sm-8 {
+        max-width: 100%;
+        padding: 1rem;
+    }
+    
+    .card-body {
+        padding: 1.25rem !important;
+    }
+}
+</style>
 {% endblock %}

@@ -62,9 +62,9 @@
                                             </a>
                                         </td>
                                         <td>{{ item.book.author }}</td>
-                                        <td>${{ "%.2f"|format(item.price_at_purchase) }}</td>
+                                        <td>₨{{ "{:,.0f}"|format(item.price_at_purchase) }}</td>
                                         <td>{{ item.quantity }}</td>
-                                        <td>${{ "%.2f"|format(item.price_at_purchase * item.quantity) }}</td>
+                                        <td>₨{{ "{:,.0f}"|format(item.price_at_purchase * item.quantity) }}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -93,16 +93,16 @@
                     <hr>
                     <div class="d-flex justify-content-between mb-3">
                         <span>Subtotal:</span>
-                        <span>${{ "%.2f"|format(order.total_price) }}</span>
+                        <span>₨{{ "{:,.0f}"|format(order.total_price) }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
                         <span>Tax (8%):</span>
-                        <span>${{ "%.2f"|format(order.total_price * 0.08) }}</span>
+                        <span>₨{{ "{:,.0f}"|format(order.total_price * 0.08) }}</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between mb-4">
                         <strong>Total:</strong>
-                        <strong class="text-success">${{ "%.2f"|format(order.total_price * 1.08) }}</strong>
+                        <strong class="text-success">₨{{ "{:,.0f}"|format(order.total_price * 1.08) }}</strong>
                     </div>
 
                     <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-primary w-100">

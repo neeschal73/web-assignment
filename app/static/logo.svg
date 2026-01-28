@@ -1,0 +1,67 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3c72;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d5a8f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d5a8f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e3c72;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#grad1)" opacity="0.1"/>
+  
+  <!-- Left Book -->
+  <g>
+    <!-- Left page -->
+    <path d="M 60 50 L 85 50 L 85 150 L 60 150 Q 55 145 55 130 L 55 70 Q 55 55 60 50" 
+          fill="url(#grad1)" stroke="url(#grad1)" stroke-width="1.5"/>
+    <!-- Left page shadow -->
+    <path d="M 60 50 L 85 50 L 85 150 L 60 150 Q 55 145 55 130 L 55 70 Q 55 55 60 50" 
+          fill="none" stroke="rgba(30,60,114,0.3)" stroke-width="1"/>
+  </g>
+  
+  <!-- Right Book -->
+  <g>
+    <!-- Right page -->
+    <path d="M 115 50 L 140 50 Q 145 55 145 70 L 145 130 Q 145 145 140 150 L 115 150 L 115 50" 
+          fill="url(#grad2)" stroke="url(#grad2)" stroke-width="1.5"/>
+    <!-- Right page shadow -->
+    <path d="M 115 50 L 140 50 Q 145 55 145 70 L 145 130 Q 145 145 140 150 L 115 150 L 115 50" 
+          fill="none" stroke="rgba(45,90,143,0.3)" stroke-width="1"/>
+  </g>
+  
+  <!-- Center Spine/Divider -->
+  <line x1="100" y1="50" x2="100" y2="150" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+  
+  <!-- Book Lines (pages texture) -->
+  <g opacity="0.5">
+    <!-- Left page lines -->
+    <line x1="65" y1="65" x2="80" y2="65" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <line x1="65" y1="80" x2="82" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <line x1="65" y1="95" x2="80" y2="95" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <line x1="65" y1="110" x2="82" y2="110" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <line x1="65" y1="125" x2="80" y2="125" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    
+    <!-- Right page lines -->
+    <line x1="120" y1="65" x2="135" y2="65" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <line x1="118" y1="80" x2="135" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <line x1="120" y1="95" x2="135" y2="95" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <line x1="118" y1="110" x2="135" y2="110" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <line x1="120" y1="125" x2="135" y2="125" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Bookmark Ribbon -->
+  <g>
+    <path d="M 140 55 Q 145 60 148 75 Q 145 70 140 70 Z" fill="url(#grad2)" opacity="0.8"/>
+    <path d="M 140 55 Q 148 60 152 80 Q 148 70 140 70 Z" fill="rgba(255,255,255,0.2)"/>
+  </g>
+  
+  <!-- Star accent (achievement) -->
+  <g transform="translate(155, 40)">
+    <polygon points="0,-8 2.4,-2.4 8,-0.8 3.2,3.2 4.8,9 0,5.6 -4.8,9 -3.2,3.2 -8,-0.8 -2.4,-2.4" 
+             fill="url(#grad2)" opacity="0.9"/>
+  </g>
+</svg>

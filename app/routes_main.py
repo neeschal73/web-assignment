@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, session
 from flask_login import current_user, login_required
 from app.models import db, Book, Category, Order, OrderItem, Review
 from app.forms import ReviewForm, ContactForm
@@ -71,6 +71,7 @@ def book_detail(book_id):
     """
     book = Book.query.get_or_404(book_id)
     reviews = Review.query.filter_by(book_id=book_id).order_by(Review.created_at.desc()).all()
+    form = ReviewForm()
     
     # Calculate average rating
     avg_rating = 0
@@ -80,7 +81,8 @@ def book_detail(book_id):
     return render_template('main/book_detail.html',
                          book=book,
                          reviews=reviews,
-                         avg_rating=avg_rating)
+                         avg_rating=avg_rating,
+                         form=form)
 
 
 @main_bp.route('/book/<int:book_id>/review', methods=['POST'])
